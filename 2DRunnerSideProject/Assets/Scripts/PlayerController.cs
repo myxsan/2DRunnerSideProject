@@ -6,13 +6,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {   
     [SerializeField] float playerFlySpeed = 10f;
+    [SerializeField] GameObject fireballs;
 
     private Rigidbody2D playerRigidbody;
     private BoxCollider2D playerCollider;
+    private Animator playerAnimator;
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<BoxCollider2D>();        
+        playerCollider = GetComponent<BoxCollider2D>();    
+        playerAnimator = GetComponent<Animator>();
+
+        fireballs.SetActive(false);
     }
 
     void Update()
@@ -25,7 +30,28 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             playerRigidbody.AddRelativeForce(Vector2.up * playerFlySpeed * Time.deltaTime);
-            Debug.Log("asd");
+
+            fireballs.SetActive(true);
+            playerAnimator.SetBool("IsFlying", true);
+        }
+        else if(!Input.GetKey(KeyCode.Space) && !HasVerticleSpeed())
+        {
+            playerAnimator.SetBool("IsFlying", false);
+        }
+        else if(Input.GetKeyUp(KeyCode.Space))
+        {
+            fireballs.SetActive(false);
+        }
+    }
+
+    private bool HasVerticleSpeed()
+    {
+        if(playerRigidbody.velocity.y < 0.1f && playerRigidbody.velocity.y > -0.1f && transform.position.y < -4.5)
+        {
+            return false;
+        } else
+        {
+            return true;
         }
     }
 }
