@@ -33,8 +33,13 @@ public class Node : MonoBehaviour
         if(closestNode != null)
         {
             isConnected = true;
+
+            lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, closestNode.transform.position);
             lineRenderer.SetPosition(1, this.transform.position);
+        } else
+        {
+            lineRenderer.enabled = false;
         }
 
     }
