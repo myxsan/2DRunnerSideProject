@@ -9,7 +9,7 @@ public class GOPusher : MonoBehaviour
     private void Update() {
         if(transform.position.x >= -50)
         {
-            transform.Translate(Vector2.left * pushSpeed * Time.deltaTime);
+            transform.Translate(Vector2.left * pushSpeed * Time.deltaTime , Space.World);
         }
         else
         {
