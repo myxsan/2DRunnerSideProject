@@ -57,19 +57,6 @@ public class Node : MonoBehaviour
         }
     }
 
-    private void SetEdgeCollider(LineRenderer lineRenderer)
-    {
-        List<Vector2> edges = new List<Vector2>();
-
-        for (int point = 0; point < lineRenderer.positionCount; point++)
-        {
-            Vector3 lineRendererPoint = lineRenderer.GetPosition(point);
-            edges.Add(new Vector2(lineRendererPoint.x, lineRendererPoint.y));
-        }
-
-        edgeCollider.SetPoints(edges);
-    }
-
     private void SetCollider()
     {
         Vector2 sides = new Vector2(closestNode.transform.position.x - this.transform.position.x, closestNode.transform.position.y - this.transform.position.y);
@@ -82,6 +69,5 @@ public class Node : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 90);
         capsuleCollider.offset = colldierOffset;
         capsuleCollider.size = colliderSize;
-        
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    int score;
-    [SerializeField] int scoreMultiplier = 5;
+    private float score;
+    [SerializeField] float scoreMultiplier = 5;
     [SerializeField] Text scoreText;
 
     void Start()
@@ -21,7 +21,7 @@ public class ScoreKeeper : MonoBehaviour
 
     private void IncreaseScorePerTime()
     {
-        score = Mathf.CeilToInt(Time.time * scoreMultiplier);
+        score += Time.deltaTime * scoreMultiplier;
         scoreText.text = score.ToString("00");
         Debug.Log(score);
     }
