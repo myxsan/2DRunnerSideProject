@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646fb913e73c30146869c4ac8c4cdb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffect: 0.3
+  parallaxEffect: 12
   turnPoint: {fileID: 415405450}
 --- !u!61 &189000666
 BoxCollider2D:
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646fb913e73c30146869c4ac8c4cdb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffect: 0.2
+  parallaxEffect: 8
   turnPoint: {fileID: 2044471826}
 --- !u!1 &483885637
 GameObject:
@@ -1042,9 +1042,10 @@ GameObject:
   - component: {fileID: 885093733}
   - component: {fileID: 885093732}
   - component: {fileID: 885093734}
+  - component: {fileID: 885093735}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1087,7 +1088,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 60348a70cfa60f0409e833470ceaf832, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1195,6 +1196,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFlySpeed: 1500
   fireballs: {fileID: 1483284298}
+--- !u!114 &885093735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885093728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8101e311699ba488a5590025e720bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAnimation: {fileID: 7400000, guid: 14b31c8a71b2d774c810df423cdaadfe, type: 2}
+  startLives: 1
+  throwPow: 10
+  throwRot: 25.6
 --- !u!1 &926284229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646fb913e73c30146869c4ac8c4cdb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffect: 0.1
+  parallaxEffect: 4
   turnPoint: {fileID: 1560237344}
 --- !u!212 &1017627987
 SpriteRenderer:

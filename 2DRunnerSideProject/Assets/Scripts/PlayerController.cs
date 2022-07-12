@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private bool HasVerticleSpeed()
     {
-        if(playerRigidbody.velocity.y < 0.1f && playerRigidbody.velocity.y > -0.1f && transform.position.y < -4.5)
+        if(playerRigidbody.velocity.y < 0.0001f && playerRigidbody.velocity.y > -0.0001f && transform.position.y < -4.5)
         {
             return false;
         } else

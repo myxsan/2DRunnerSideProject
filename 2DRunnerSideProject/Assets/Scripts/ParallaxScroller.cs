@@ -9,6 +9,7 @@ public class ParallaxScroller : MonoBehaviour
     private Camera mainCam;
     [SerializeField] float parallaxEffect;
     [SerializeField] Transform turnPoint;
+    float reduceAmountPerTime = .000000001f;
 
     private Material myMat;
 
@@ -21,16 +22,24 @@ public class ParallaxScroller : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        transform.Translate(Vector2.left * parallaxEffect);
-
-        if(turnPoint.position.x <= mainCam.transform.position.x)
+        if(!GameManager.instance.isDead)
         {
-            transform.position = startPos;
+            transform.Translate(Vector2.left * parallaxEffect * Time.deltaTime);
+
+            if(turnPoint.position.x <= mainCam.transform.position.x)
+            {
+                transform.position = startPos;
+            }
         }
 
+        if(GameManager.instance.isDead)
+        {
+            DeathSequence();
+        }
     }
 
-    // private void Update() {
-    //     myMat.mainTextureOffset += parallaxEffect * Time.deltaTime;
-    // }
+    void DeathSequence()
+    {
+        parallaxEffect -= reduceAmountPerTime * (parallaxEffect / 4) * Time.deltaTime;
+    }
 }

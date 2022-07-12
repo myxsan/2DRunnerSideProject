@@ -16,6 +16,7 @@ public class ScoreKeeper : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.instance.isDead) return;
         IncreaseScorePerTime();
     }
 
@@ -23,6 +24,5 @@ public class ScoreKeeper : MonoBehaviour
     {
         score += Time.deltaTime * scoreMultiplier;
         scoreText.text = score.ToString("00");
-        Debug.Log(score);
     }
 }
