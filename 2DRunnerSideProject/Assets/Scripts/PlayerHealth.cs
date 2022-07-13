@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] GameObject gameOverMenu;
+
     Animator playerAnimator;
     Rigidbody2D rb;
 
@@ -16,10 +18,11 @@ public class PlayerHealth : MonoBehaviour
     int lives;
     void Start()
     {
+        lives = startLives;
+        gameOverMenu.SetActive(false);
+
         playerAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        lives = startLives;
-
         parallaxScrollers = FindObjectsOfType<ParallaxScroller>();
     }
 
@@ -36,24 +39,42 @@ public class PlayerHealth : MonoBehaviour
             playerAnimator.SetBool("HasDamaged", false);
         }else
         {
-            Die();
+            StartCoroutine(StartGameOverSequence());
         }
     }
 
-    void Die()
+    IEnumerator StartGameOverSequence()
     {
-        GetComponent<PlayerController>().enabled = false;
-        FindObjectOfType<NodeSpawner>().enabled = false;
+        DisableControllers();
+        ThrowPlayer();
+        DisableParallaxEffect();
 
-        rb.velocity = (2 * Vector2.up + Vector2.left) * throwPow;
-        
-        Quaternion mainRot = transform.rotation;
-        Quaternion deathRot = Quaternion.Euler(0f, 0f, throwRot);
-        transform.rotation = Quaternion.Slerp(transform.rotation,deathRot, 1f);
+        yield return new WaitForSeconds(1f);
 
-        foreach(ParallaxScroller parallaxScroller in parallaxScrollers)
+        gameOverMenu.SetActive(true);
+
+    }
+
+    private void DisableParallaxEffect()
+    {
+        foreach (ParallaxScroller parallaxScroller in parallaxScrollers)
         {
             GameManager.instance.isDead = true;
         }
+    }
+
+    private void ThrowPlayer()
+    {
+        rb.velocity = (2 * Vector2.up + Vector2.left) * throwPow;
+
+        Quaternion mainRot = transform.rotation;
+        Quaternion deathRot = Quaternion.Euler(0f, 0f, throwRot);
+        transform.rotation = Quaternion.Slerp(transform.rotation, deathRot, 1f);
+    }
+
+    private void DisableControllers()
+    {
+        GetComponent<PlayerController>().enabled = false;
+        FindObjectOfType<NodeSpawner>().enabled = false;
     }
 }

@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
 
     public void PauseButton()
     {
-
         PauseMenu.SetActive(true);
     }
-
 }
