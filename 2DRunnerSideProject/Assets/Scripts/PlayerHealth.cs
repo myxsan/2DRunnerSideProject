@@ -5,6 +5,18 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Unity Setup Filed")]
+    [SerializeField] GameObject gameOverMenu;
+    [SerializeField] Transform livesParent;
+    [SerializeField] AnimationClip damageAnimation;
+
+    [Header("Amounts")]
+    [SerializeField] int startLives = 3;
+    [SerializeField] float throwPow = 100f;
+    [SerializeField] [Range(0f, 90f)] float throwRot;
+
+    private bool damageTaken = false;
+    private float damageCountDown = 0;
 
     Animator playerAnimator;
     Rigidbody2D rb;
@@ -12,13 +24,6 @@ public class PlayerHealth : MonoBehaviour
     ParallaxScroller[] parallaxScrollers;
     Image[] hearths;
 
-    [SerializeField] GameObject gameOverMenu;
-    [SerializeField] Transform livesParent;
-
-    [SerializeField] AnimationClip damageAnimation;
-    [SerializeField] int startLives = 3;
-    [SerializeField] float throwPow = 100f;
-    [SerializeField] [Range(0f, 90f)] float throwRot;
     int lives;
     void Start()
     {
@@ -31,13 +36,26 @@ public class PlayerHealth : MonoBehaviour
         parallaxScrollers = FindObjectsOfType<ParallaxScroller>();
     }
 
+    private void Update() {
+        if(!damageTaken) return;
+        damageCountDown -= Time.deltaTime;
+
+        if(damageCountDown > 0) return;
+        damageTaken = false;
+    }
+
     public IEnumerator DecreaseLives()
     {
-        lives--;
+        if(!damageTaken)
+        {
+            lives--;
+            damageTaken = true;
+            damageCountDown = 1;
+        }
 
         if(lives >= 0)
         {
-            DisableLiveAnim(1, livesParent.GetChild(lives).GetComponent<Image>());
+            DisableLiveAnim(livesParent.GetChild(lives).GetComponent<Image>());
 
         }
 
@@ -90,8 +108,8 @@ public class PlayerHealth : MonoBehaviour
         FindObjectOfType<NodeSpawner>().enabled = false;
     }
 
-    private void DisableLiveAnim(int duration, Image live)
+    private void DisableLiveAnim(Image live)
     {
-        live.GetComponent<CanvasGroup>().alpha = 0;
+        live.GetComponent<Animator>().enabled = true;
     }
 }
