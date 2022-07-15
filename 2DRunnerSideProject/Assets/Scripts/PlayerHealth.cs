@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] GameObject gameOverMenu;
 
     Animator playerAnimator;
     Rigidbody2D rb;
 
     ParallaxScroller[] parallaxScrollers;
+    Image[] hearths;
+
+    [SerializeField] GameObject gameOverMenu;
+    [SerializeField] Transform livesParent;
 
     [SerializeField] AnimationClip damageAnimation;
     [SerializeField] int startLives = 3;
@@ -19,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         lives = startLives;
+        Debug.Log(lives);
         gameOverMenu.SetActive(false);
 
         playerAnimator = GetComponent<Animator>();
@@ -30,8 +35,15 @@ public class PlayerHealth : MonoBehaviour
     {
         lives--;
 
+        if(lives >= 0)
+        {
+            DisableLiveAnim(1, livesParent.GetChild(lives).GetComponent<Image>());
+
+        }
+
         if(lives > 0)
         {
+        
             playerAnimator.SetBool("HasDamaged", true);
 
             yield return new WaitForSeconds(damageAnimation.length);
@@ -76,5 +88,10 @@ public class PlayerHealth : MonoBehaviour
     {
         GetComponent<PlayerController>().enabled = false;
         FindObjectOfType<NodeSpawner>().enabled = false;
+    }
+
+    private void DisableLiveAnim(int duration, Image live)
+    {
+        live.GetComponent<CanvasGroup>().alpha = 0;
     }
 }
