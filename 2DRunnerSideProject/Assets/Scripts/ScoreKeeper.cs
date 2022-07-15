@@ -18,13 +18,13 @@ public class ScoreKeeper : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.instance.isDead)
+        if(!GameManager.instance.isDead)
         {
             IncreaseScorePerTime();
         }else
         {
-            
             scoreText.enabled = false;
+            this.enabled = false;
         }
     }
 
