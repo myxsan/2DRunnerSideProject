@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ParallaxScroller : MonoBehaviour
 {
+    [SerializeField] float parallaxEffect;
+    [SerializeField] float reduceAmountPerTime = .1f;
+    [SerializeField] bool isFullImage = true;
+
+    [Tooltip("Leave it blank if it is full image")]    
+    [SerializeField] Transform turnPoint;
+
     private float length;
     private Vector2 startPos;
     private Camera mainCam;
-    [SerializeField] float parallaxEffect;
-    [SerializeField] Transform turnPoint;
-    float reduceAmountPerTime = .000000001f;
-
     private Material myMat;
 
     private void Start() {
@@ -21,25 +24,46 @@ public class ParallaxScroller : MonoBehaviour
         myMat = GetComponent<Renderer>().material;
     }
 
-    private void FixedUpdate() {
-        if(!GameManager.instance.isDead)
-        {
-            transform.Translate(Vector2.left * parallaxEffect * Time.deltaTime);
+    private void FixedUpdate()
+    {
+        if(isFullImage) FullImageParallaxScroller();
+        else if(!isFullImage)NonFullImageParallaxScroll();
 
-            if(turnPoint.position.x <= mainCam.transform.position.x)
-            {
-                transform.position = startPos;
-            }
-        }
-
-        if(GameManager.instance.isDead)
+        if (GameManager.instance.isDead)
         {
             DeathSequence();
         }
     }
 
+    private void FullImageParallaxScroller()
+    {
+        myMat.mainTextureOffset += new Vector2(parallaxEffect * Time.deltaTime, 0f);
+    }
+
+    private void NonFullImageParallaxScroll()
+    {
+        transform.Translate(Vector2.left * parallaxEffect * Time.deltaTime);
+
+        if (turnPoint.position.x <= mainCam.transform.position.x)
+        {
+            transform.position = startPos;
+        }
+    }
+
     void DeathSequence()
     {
-        parallaxEffect -= reduceAmountPerTime * (parallaxEffect / 4) * Time.deltaTime;
+        if(isFullImage)
+        {
+            parallaxEffect -= reduceAmountPerTime * 0.1f * Time.deltaTime;
+        }else
+        {
+            parallaxEffect -= reduceAmountPerTime * Time.deltaTime;
+        }
+
+        if(parallaxEffect <= 0) 
+        {
+            this.enabled = false;
+            return;
+        } 
     }
 }

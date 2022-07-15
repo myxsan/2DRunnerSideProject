@@ -10,8 +10,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Transform livesParent;
     [SerializeField] AnimationClip damageAnimation;
 
-    [Header("Amounts")]
+    [Header("Player Stats")]
     [SerializeField] int startLives = 3;
+
+    [Header("Death Sequence")]
     [SerializeField] float throwPow = 100f;
     [SerializeField] [Range(0f, 90f)] float throwRot;
 
