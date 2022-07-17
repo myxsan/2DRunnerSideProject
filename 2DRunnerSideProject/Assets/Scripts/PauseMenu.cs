@@ -5,15 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] SceneFader sceneFader;
-
     private void OnEnable() {
         Time.timeScale = 0;
     }
     private void OnDisable() {
         Time.timeScale = 1;
     }
-    
+
     public void Continue()
     {
         GameManager.instance.PauseMenu.SetActive(false);
@@ -21,12 +19,12 @@ public class PauseMenu : MonoBehaviour
 
     public void Retry()
     {
-        sceneFader.FadeTo("MainGame");
+        SceneFader.instance.FadeTo("MainGame");
     }
 
     public void Menu()
     {
-        sceneFader.FadeTo("Menu");
+        SceneFader.instance.FadeTo("Menu");
     }
 
 }

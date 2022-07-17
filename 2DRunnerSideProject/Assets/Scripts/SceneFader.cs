@@ -8,6 +8,20 @@ public class SceneFader : MonoBehaviour
     [SerializeField] Image img;
     [SerializeField] AnimationCurve curve;
 
+    public static SceneFader instance;
+
+    private void Awake() {
+        if(SceneFader.instance == null)
+        {
+            SceneFader.instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+
     private void Start() {
         StartCoroutine(FadeIn());
     }
@@ -15,6 +29,11 @@ public class SceneFader : MonoBehaviour
     public void FadeTo(string scene)
     {
         StartCoroutine(FadeOut(scene));
+    }
+
+    public void StartFade()
+    {
+        StartCoroutine(FadeIn());
     }
 
     IEnumerator FadeIn()
@@ -29,7 +48,7 @@ public class SceneFader : MonoBehaviour
         }
     }
 
-        IEnumerator FadeOut(string scene)
+    IEnumerator FadeOut(string scene)
     {
         float t = 0f;
         while (t < 1f)

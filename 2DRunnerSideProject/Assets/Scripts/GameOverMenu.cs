@@ -9,7 +9,6 @@ public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] ScoreKeeper scoreKeeper;
     [SerializeField] Text gameOverScoreText;
-    [SerializeField] SceneFader sceneFader;
     
     private void Start() {
         this.gameObject.SetActive(false);
@@ -26,11 +25,11 @@ public class GameOverMenu : MonoBehaviour
 
     public void Retry()
     {
-        sceneFader.FadeTo("MainGame");
+        SceneFader.instance.FadeTo("MainGame");
     }
 
     public void Menu()
     {
-        sceneFader.FadeTo("Menu");
+        SceneFader.instance.FadeTo("Menu");
     }
 }
