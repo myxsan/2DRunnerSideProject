@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Unity Setup Filed")]
     [SerializeField] GameObject gameOverMenu;
+    [SerializeField] GameObject playUI;
     [SerializeField] Transform livesParent;
     [SerializeField] AnimationClip damageAnimation;
 
@@ -80,6 +81,7 @@ public class PlayerHealth : MonoBehaviour
         DisableControllers();
         ThrowPlayer();
         DisableParallaxEffect();
+        DisablePlayUI();
 
         yield return new WaitForSeconds(1f);
 
@@ -113,5 +115,10 @@ public class PlayerHealth : MonoBehaviour
     private void DisableLiveAnim(Image live)
     {
         live.GetComponent<Animator>().enabled = true;
+    }
+
+    private void DisablePlayUI()
+    {
+        playUI.SetActive(false);
     }
 }

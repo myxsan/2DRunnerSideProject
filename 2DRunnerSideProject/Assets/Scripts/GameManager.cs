@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject PauseMenu;
+    public AudioClip buttonClickSFX;
     [SerializeField] Button audioButton;
     public bool isDead {get; set;} = false;
 

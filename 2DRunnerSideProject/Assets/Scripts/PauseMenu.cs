@@ -12,18 +12,39 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void Continue()
+    public void ContinueButton()
     {
+        StartCoroutine(Continue());
+    }
+
+    public void RetryButton()
+    {
+        StartCoroutine(Retry());
+    }
+
+    public void MenuButton()
+    {
+        StartCoroutine(Menu());
+    }
+
+    IEnumerator Continue()
+    {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.instance.buttonClickSFX);
+        yield return new WaitForSecondsRealtime(GameManager.instance.buttonClickSFX.length);
         GameManager.instance.PauseMenu.SetActive(false);
     }
 
-    public void Retry()
+    IEnumerator Retry()
     {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.instance.buttonClickSFX);
+        yield return new WaitForSecondsRealtime(GameManager.instance.buttonClickSFX.length);
         SceneFader.instance.FadeTo("MainGame");
     }
 
-    public void Menu()
+    IEnumerator Menu()
     {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.instance.buttonClickSFX);
+        yield return new WaitForSecondsRealtime(GameManager.instance.buttonClickSFX.length);
         SceneFader.instance.FadeTo("Menu");
     }
 

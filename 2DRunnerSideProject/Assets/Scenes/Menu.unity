@@ -1147,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4341445073645570549, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4341445073645570549, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1180,10 +1180,6 @@ PrefabInstance:
     - target: {fileID: 4341445073645570554, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4341445073645570554, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
