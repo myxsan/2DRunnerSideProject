@@ -1065,7 +1065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89455012d7903c54f92d11c47c575e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenu: {fileID: 100465013}
+  pauseMenu: {fileID: 100465013}
+  gameOverMenu: {fileID: 749791410}
+  playUI: {fileID: 372094970}
   buttonClickSFX: {fileID: 8300000, guid: 467a3d2dafe66cd419633d3b2a4c00b7, type: 3}
   audioButton: {fileID: 1142982316}
 --- !u!4 &483885639
@@ -2023,8 +2025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8101e311699ba488a5590025e720bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverMenu: {fileID: 749791410}
-  playUI: {fileID: 372094970}
   livesParent: {fileID: 1048542269}
   damageAnimation: {fileID: 7400000, guid: 14b31c8a71b2d774c810df423cdaadfe, type: 2}
   startLives: 3

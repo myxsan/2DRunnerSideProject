@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,36 +7,58 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject PauseMenu;
+
+    public GameObject pauseMenu;
+    public GameObject gameOverMenu;
+    public GameObject playUI;
     public AudioClip buttonClickSFX;
     [SerializeField] Button audioButton;
-    public bool isDead {get; set;} = false;
+    public bool isDead { get; set; } = false;
 
-    private void Awake() {
-        if(instance == null)
+    private void Awake()
+    {
+        if (instance == null)
         {
             instance = this;
         }
     }
-    private void Start() {
-        PauseMenu.SetActive(false);
+    private void Start()
+    {
+        pauseMenu.SetActive(false);
+        SetGameOverMenu(false);
         SceneFader.instance.StartFade();
+        SetAudioButton();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         MusicPlayer.instance.audioButton = this.audioButton;
     }
-    private void OnDisable() {
+    private void OnDisable()
+    {
         MusicPlayer.instance.audioButton = null;
     }
 
     public void PauseButton()
     {
-        PauseMenu.SetActive(true);
+        pauseMenu.SetActive(true);
     }
 
     public void AudioButton()
     {
         MusicPlayer.instance.ToggleMusic();
+    }
+
+    public void SetGameOverMenu(bool state)
+    {
+        gameOverMenu.SetActive(state);
+    }
+
+    private void SetAudioButton()
+    {
+        if (MusicPlayer.audioState == false)
+        {
+            audioButton.GetComponent<Image>().sprite = MusicPlayer.instance.turnedOffSprite;
+        }
     }
 }

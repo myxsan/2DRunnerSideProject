@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Unity Setup Filed")]
-    [SerializeField] GameObject gameOverMenu;
-    [SerializeField] GameObject playUI;
     [SerializeField] Transform livesParent;
     [SerializeField] AnimationClip damageAnimation;
 
@@ -16,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Death Sequence")]
     [SerializeField] float throwPow = 100f;
-    [SerializeField] [Range(0f, 90f)] float throwRot;
+    [SerializeField][Range(0f, 90f)] float throwRot;
 
     private bool damageTaken = false;
     private float damageCountDown = 0;
@@ -31,46 +29,44 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         lives = startLives;
-        Debug.Log(lives);
-        gameOverMenu.SetActive(false);
 
         playerAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        parallaxScrollers = FindObjectsOfType<ParallaxScroller>();
     }
 
-    private void Update() {
-        if(!damageTaken) return;
+    private void Update()
+    {
+        if (!damageTaken) return;
         damageCountDown -= Time.deltaTime;
 
-        if(damageCountDown > 0) return;
+        if (damageCountDown > 0) return;
         damageTaken = false;
     }
 
     public IEnumerator DecreaseLives()
     {
-        if(!damageTaken)
+        if (!damageTaken)
         {
             lives--;
             damageTaken = true;
             damageCountDown = 1;
         }
 
-        if(lives >= 0)
+        if (lives >= 0)
         {
             DisableLiveAnim(livesParent.GetChild(lives).GetComponent<Image>());
-
         }
 
-        if(lives > 0)
+        if (lives > 0)
         {
-        
+
             playerAnimator.SetBool("HasDamaged", true);
 
             yield return new WaitForSeconds(damageAnimation.length);
 
             playerAnimator.SetBool("HasDamaged", false);
-        }else
+        }
+        else
         {
             StartCoroutine(StartGameOverSequence());
         }
@@ -79,22 +75,24 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator StartGameOverSequence()
     {
         DisableControllers();
+        DisablePlayUI();
         ThrowPlayer();
         DisableParallaxEffect();
-        DisablePlayUI();
 
         yield return new WaitForSeconds(1f);
 
-        gameOverMenu.SetActive(true);
-
+        GameManager.instance.SetGameOverMenu(true);
     }
 
-    private void DisableParallaxEffect()
+    private void DisableControllers()
     {
-        foreach (ParallaxScroller parallaxScroller in parallaxScrollers)
-        {
-            GameManager.instance.isDead = true;
-        }
+        GetComponent<PlayerController>().enabled = false;
+        FindObjectOfType<NodeSpawner>().enabled = false;
+    }
+
+    private void DisablePlayUI()
+    {
+        GameManager.instance.playUI.SetActive(false);
     }
 
     private void ThrowPlayer()
@@ -106,19 +104,18 @@ public class PlayerHealth : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, deathRot, 1f);
     }
 
-    private void DisableControllers()
+    private void DisableParallaxEffect()
     {
-        GetComponent<PlayerController>().enabled = false;
-        FindObjectOfType<NodeSpawner>().enabled = false;
+        parallaxScrollers = FindObjectsOfType<ParallaxScroller>();
+
+        foreach (ParallaxScroller parallaxScroller in parallaxScrollers)
+        {
+            GameManager.instance.isDead = true;
+        }
     }
 
     private void DisableLiveAnim(Image live)
     {
         live.GetComponent<Animator>().enabled = true;
-    }
-
-    private void DisablePlayUI()
-    {
-        playUI.SetActive(false);
     }
 }

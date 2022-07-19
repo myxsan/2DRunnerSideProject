@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{   
+{
     [SerializeField] float playerFlySpeed = 10f;
     [SerializeField] GameObject fireballs;
 
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<BoxCollider2D>();    
+        playerCollider = GetComponent<BoxCollider2D>();
         playerAnimator = GetComponent<Animator>();
 
         fireballs.SetActive(false);
@@ -27,18 +27,18 @@ public class PlayerController : MonoBehaviour
 
     private void GetPlayerInput()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             playerRigidbody.AddRelativeForce(Vector2.up * playerFlySpeed * Time.deltaTime);
 
             fireballs.SetActive(true);
             playerAnimator.SetBool("IsFlying", true);
         }
-        else if(!Input.GetKey(KeyCode.Space) && !HasVerticleSpeed())
+        else if (!Input.GetKey(KeyCode.Space) && !HasVerticleSpeed())
         {
             playerAnimator.SetBool("IsFlying", false);
         }
-        else if(Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.Space))
         {
             fireballs.SetActive(false);
         }
@@ -46,10 +46,11 @@ public class PlayerController : MonoBehaviour
 
     private bool HasVerticleSpeed()
     {
-        if(playerRigidbody.velocity.y < 0.0001f && playerRigidbody.velocity.y > -0.0001f && transform.position.y < -4.5)
+        if (playerRigidbody.velocity.y < 0.0001f && playerRigidbody.velocity.y > -0.0001f && transform.position.y < -4.5)
         {
             return false;
-        } else
+        }
+        else
         {
             return true;
         }

@@ -5,24 +5,21 @@ using UnityEngine;
 public class Node : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    private EdgeCollider2D edgeCollider;
     private CapsuleCollider2D capsuleCollider;
 
     GameObject[] nodes;
     private bool isConnected = false;
-    private float minDistance = Mathf.Infinity;
     private GameObject closestNode;
 
-    private void Start() {
+    private void Start()
+    {
         lineRenderer = GetComponent<LineRenderer>();
-        edgeCollider = GetComponent<EdgeCollider2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
     private void Update()
     {
         SetLineRenderer();
-
     }
 
     private void SetLineRenderer()
@@ -30,6 +27,9 @@ public class Node : MonoBehaviour
         if (!isConnected)
         {
             nodes = GameObject.FindGameObjectsWithTag("Node");
+
+            float minDistance = Mathf.Infinity;
+            closestNode = null;
 
             foreach (GameObject node in nodes)
             {
@@ -64,9 +64,9 @@ public class Node : MonoBehaviour
 
         Vector2 colliderSize = new Vector2(this.transform.localScale.x, colliderLength);
         Vector2 colldierOffset = new Vector2(0f, (colliderLength - this.transform.localScale.y) / 2);
-        float rotationZ = Mathf.Atan2(sides.y, sides.x) * Mathf.Rad2Deg;
+        float rotationZ = Mathf.Atan2(sides.y, sides.x) * Mathf.Rad2Deg - 90;
 
-        transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 90);
+        transform.rotation = Quaternion.Euler(0f, 0f, rotationZ);
         capsuleCollider.offset = colldierOffset;
         capsuleCollider.size = colliderSize;
     }

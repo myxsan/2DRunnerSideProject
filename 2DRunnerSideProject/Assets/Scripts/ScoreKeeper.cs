@@ -9,7 +9,7 @@ public class ScoreKeeper : MonoBehaviour
     [SerializeField] float scoreMultiplier = 5;
     [SerializeField] Text scoreText;
 
-    public float Score{ get {return score;} }
+    public float Score { get { return score; } }
 
     void Start()
     {
@@ -18,13 +18,9 @@ public class ScoreKeeper : MonoBehaviour
 
     void Update()
     {
-        if(!GameManager.instance.isDead)
+        if (!GameManager.instance.isDead)
         {
             IncreaseScorePerTime();
-        }else
-        {
-            scoreText.enabled = false;
-            this.enabled = false;
         }
     }
 

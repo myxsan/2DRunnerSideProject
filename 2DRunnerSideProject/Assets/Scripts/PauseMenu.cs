@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private void OnEnable() {
+    private void OnEnable()
+    {
         Time.timeScale = 0;
     }
-    private void OnDisable() {
+    private void OnDisable()
+    {
         Time.timeScale = 1;
     }
 
@@ -19,33 +21,25 @@ public class PauseMenu : MonoBehaviour
 
     public void RetryButton()
     {
-        StartCoroutine(Retry());
+        StartCoroutine(ButtonGoScene("MainGame"));
     }
 
     public void MenuButton()
     {
-        StartCoroutine(Menu());
+        StartCoroutine(ButtonGoScene("Menu"));
     }
 
     IEnumerator Continue()
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.instance.buttonClickSFX);
         yield return new WaitForSecondsRealtime(GameManager.instance.buttonClickSFX.length);
-        GameManager.instance.PauseMenu.SetActive(false);
+        GameManager.instance.pauseMenu.SetActive(false);
     }
 
-    IEnumerator Retry()
+    IEnumerator ButtonGoScene(string scene)
     {
         Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.instance.buttonClickSFX);
         yield return new WaitForSecondsRealtime(GameManager.instance.buttonClickSFX.length);
-        SceneFader.instance.FadeTo("MainGame");
+        SceneFader.instance.FadeTo(scene);
     }
-
-    IEnumerator Menu()
-    {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.instance.buttonClickSFX);
-        yield return new WaitForSecondsRealtime(GameManager.instance.buttonClickSFX.length);
-        SceneFader.instance.FadeTo("Menu");
-    }
-
 }

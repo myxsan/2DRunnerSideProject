@@ -9,12 +9,9 @@ public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] ScoreKeeper scoreKeeper;
     [SerializeField] Text gameOverScoreText;
-    
-    private void Start() {
-        this.gameObject.SetActive(false);
-    }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         SetGameOverScore();
     }
 
@@ -25,25 +22,18 @@ public class GameOverMenu : MonoBehaviour
 
     public void RetryButton()
     {
-        StartCoroutine(Retry());
+        StartCoroutine(ButtonGoScene("MainGame"));
     }
 
     public void MenuButton()
     {
-        StartCoroutine(Menu());
+        StartCoroutine(ButtonGoScene("Menu"));
     }
 
-    IEnumerator Retry()
+    IEnumerator ButtonGoScene(string scene)
     {
         AudioSource.PlayClipAtPoint(GameManager.instance.buttonClickSFX, Camera.main.transform.position);
         yield return new WaitForSeconds(GameManager.instance.buttonClickSFX.length);
-        SceneFader.instance.FadeTo("MainGame");
-    }
-
-    IEnumerator Menu()
-    {
-        AudioSource.PlayClipAtPoint(GameManager.instance.buttonClickSFX, Camera.main.transform.position);
-        yield return new WaitForSeconds(GameManager.instance.buttonClickSFX.length);
-        SceneFader.instance.FadeTo("Menu");
+        SceneFader.instance.FadeTo(scene);
     }
 }

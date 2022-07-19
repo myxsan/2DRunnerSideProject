@@ -10,20 +10,22 @@ public class SceneFader : MonoBehaviour
 
     public static SceneFader instance;
 
-    private void Awake() {
-        if(SceneFader.instance == null)
+    private void Awake()
+    {
+        if (SceneFader.instance == null)
         {
             SceneFader.instance = this;
             DontDestroyOnLoad(this.gameObject);
-        }else
+        }
+        else
         {
             Destroy(this.gameObject);
         }
     }
 
-
-    private void Start() {
-        StartCoroutine(FadeIn());
+    private void Start()
+    {
+        StartFade();
     }
 
     public void FadeTo(string scene)

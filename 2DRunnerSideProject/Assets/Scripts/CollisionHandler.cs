@@ -6,11 +6,13 @@ public class CollisionHandler : MonoBehaviour
 {
     PlayerHealth playerHealth;
 
-    private void Start() {
+    private void Start()
+    {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Player")
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
         {
             StartCoroutine(playerHealth.DecreaseLives());
         }
