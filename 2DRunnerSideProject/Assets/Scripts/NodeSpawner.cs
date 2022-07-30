@@ -16,19 +16,16 @@ public class NodeSpawner : MonoBehaviour
     [SerializeField] float spawnRangeMagnitude = 10f;
     [SerializeField] float spawnRate = 5f;
 
-    bool hasSpawned = false;
 
-    private void Update()
+    private void Start()
     {
         StartCoroutine(SpawnNodes());
     }
 
     IEnumerator SpawnNodes()
     {
-        if (!hasSpawned)
+        while(true)
         {
-            hasSpawned = true;
-
             float randomY = Random.Range(bottomBorder.position.y, topBorder.transform.position.y);
             Vector3 randomPos = new Vector3(this.transform.position.x,
                                             randomY,
@@ -42,15 +39,13 @@ public class NodeSpawner : MonoBehaviour
             randomPos.y = Random.Range(bottomBorder.position.y, topBorder.transform.position.y);
 
             randomPos.y = Mathf.Clamp(randomPos.y,
-                                     primaryNodeIns.transform.position.y - maxDistanceBetweenNodes,
-                                     primaryNodeIns.transform.position.y + maxDistanceBetweenNodes);
+                                        primaryNodeIns.transform.position.y - maxDistanceBetweenNodes,
+                                        primaryNodeIns.transform.position.y + maxDistanceBetweenNodes);
 
             Instantiate(secondaryNode, randomPos, Quaternion.identity);
 
             spawnRate = Random.Range(1f, 5f);
             yield return new WaitForSeconds(spawnRate);
-
-            hasSpawned = false;
         }
     }
 }
