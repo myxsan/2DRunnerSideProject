@@ -22,9 +22,6 @@ public class PlayerHealth : MonoBehaviour
     Animator playerAnimator;
     Rigidbody2D rb;
 
-    ParallaxScroller[] parallaxScrollers;
-    Image[] hearths;
-
     int lives;
     void Start()
     {
@@ -77,8 +74,8 @@ public class PlayerHealth : MonoBehaviour
         DisableControllers();
         DisablePlayUI();
         ThrowPlayer();
-        DisableParallaxEffect();
 
+        GameManager.instance.isDead = true;
         yield return new WaitForSeconds(1f);
 
         GameManager.instance.SetGameOverMenu(true);
@@ -99,19 +96,8 @@ public class PlayerHealth : MonoBehaviour
     {
         rb.velocity = (2 * Vector2.up + Vector2.left) * throwPow;
 
-        Quaternion mainRot = transform.rotation;
         Quaternion deathRot = Quaternion.Euler(0f, 0f, throwRot);
         transform.rotation = Quaternion.Slerp(transform.rotation, deathRot, 1f);
-    }
-
-    private void DisableParallaxEffect()
-    {
-        parallaxScrollers = FindObjectsOfType<ParallaxScroller>();
-
-        foreach (ParallaxScroller parallaxScroller in parallaxScrollers)
-        {
-            GameManager.instance.isDead = true;
-        }
     }
 
     private void DisableLiveAnim(Image live)

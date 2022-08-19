@@ -8,7 +8,6 @@ public class Node : MonoBehaviour
     private CapsuleCollider2D capsuleCollider;
 
     GameObject[] nodes;
-    private bool isConnected = false;
     private GameObject closestNode;
 
     private void Start()
@@ -24,7 +23,7 @@ public class Node : MonoBehaviour
 
     private void SetLineRenderer()
     {
-        if (!isConnected)
+        if (ReferenceEquals(closestNode, null))
         {
             nodes = GameObject.FindGameObjectsWithTag("Node");
 
@@ -33,9 +32,10 @@ public class Node : MonoBehaviour
 
             foreach (GameObject node in nodes)
             {
-                if (Vector3.Distance(this.transform.position, node.transform.position) <= minDistance)
+                float dis = Vector3.Distance(transform.position, node.transform.position);
+                if (dis <= minDistance)
                 {
-                    minDistance = Vector3.Distance(this.transform.position, node.transform.position);
+                    minDistance = dis;
                     closestNode = node;
                 }
             }
@@ -43,11 +43,8 @@ public class Node : MonoBehaviour
 
         if (closestNode != null)
         {
-            isConnected = true;
-
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, closestNode.transform.position);
-            lineRenderer.SetPosition(1, this.transform.position);
+            lineRenderer.SetPosition(0, this.transform.position);
+            lineRenderer.SetPosition(1, closestNode.transform.position);
 
             SetCollider();
         }
