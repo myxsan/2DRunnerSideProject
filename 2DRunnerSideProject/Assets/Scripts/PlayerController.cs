@@ -27,18 +27,18 @@ public class PlayerController : MonoBehaviour
 
     private void GetPlayerInput()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
             playerRigidbody.AddRelativeForce(Vector2.up * playerFlySpeed * Time.deltaTime);
 
             fireballs.SetActive(true);
             playerAnimator.SetBool("IsFlying", true);
         }
-        else if (!Input.GetKey(KeyCode.Space) && !HasVerticleSpeed())
+        else if ((!Input.GetKey(KeyCode.Space) || !Input.GetMouseButton(0)) && !HasVerticleSpeed())
         {
             playerAnimator.SetBool("IsFlying", false);
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
         {
             fireballs.SetActive(false);
         }

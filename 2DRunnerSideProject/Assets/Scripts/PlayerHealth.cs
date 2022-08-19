@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Unity Setup Filed")]
+    [Header("On Hit References")]
     [SerializeField] Transform livesParent;
     [SerializeField] AnimationClip damageAnimation;
 

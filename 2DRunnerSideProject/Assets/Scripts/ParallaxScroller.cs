@@ -4,66 +4,58 @@ using UnityEngine;
 
 public class ParallaxScroller : MonoBehaviour
 {
-    [SerializeField] float parallaxEffect;
-    [SerializeField] float reduceAmountPerTime = .1f;
-    [SerializeField] bool isFullImage = true;
-
-    [Tooltip("Leave it blank if it is full image")]
-    [SerializeField] Transform turnPoint;
-
-    private float length;
-    private Vector2 startPos;
-    private Material material;
+    public ParallaxEffect[] Effects;
 
     private void Start()
     {
-        startPos = transform.position;
-
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
-        material = GetComponent<Renderer>().material;
+        foreach(ParallaxEffect effect in Effects)
+        {
+            effect.material = effect.image.material;
+            effect.length = effect.image.bounds.size.x;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (isFullImage) FullImageParallaxScroller();
-        else if (!isFullImage) NonFullImageParallaxScroll();
-
-        if (GameManager.instance.isDead)
+        foreach(ParallaxEffect effect in Effects)
         {
-            DeathSequence();
+            Scroll(effect);
+            if(GameManager.instance.isDead)
+            {
+                StartDeathSequence(effect);
+            }
         }
     }
 
-    private void FullImageParallaxScroller()
+    private void Scroll(ParallaxEffect item)
     {
-        material.mainTextureOffset += new Vector2(parallaxEffect * Time.deltaTime, 0f);
+        item.material.mainTextureOffset += new Vector2(item.parallaxEffect * Time.fixedDeltaTime, 0f);
     }
 
-    private void NonFullImageParallaxScroll()
+    void StartDeathSequence(ParallaxEffect item)
     {
-        transform.Translate(Vector2.left * parallaxEffect * Time.deltaTime, Space.World);
 
-        if (turnPoint.position.x <= Camera.main.transform.position.x)
-        {
-            transform.position = startPos;
-        }
-    }
+        item.parallaxEffect -= item.reduceAmountPerTime * 0.1f * Time.deltaTime;
 
-    void DeathSequence()
-    {
-        if (isFullImage)
+        if (item.parallaxEffect <= 0)
         {
-            parallaxEffect -= reduceAmountPerTime * 0.1f * Time.deltaTime;
-        }
-        else
-        {
-            parallaxEffect -= reduceAmountPerTime * Time.deltaTime;
-        }
-
-        if (parallaxEffect <= 0)
-        {
-            parallaxEffect = 0;
+            item.parallaxEffect = 0;
             this.enabled = false;
         }
     }
 }
+
+#region Parallax Class
+[System.Serializable]
+public class ParallaxEffect
+{
+    public SpriteRenderer image;
+    public float parallaxEffect;
+    [Tooltip("This value will reduce the parallax effect value on death sequence")]
+    public float reduceAmountPerTime = .1f;
+
+    [HideInInspector] public float length;
+    [HideInInspector] public Vector2 startPos;
+    [HideInInspector] public Material material;
+}
+#endregion

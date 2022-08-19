@@ -13,7 +13,6 @@ public class NodeSpawner : MonoBehaviour
     [Header("Spawn Configuration")]
     [SerializeField] Vector2 randomTimeBetweenNodes = new Vector2(0.2f, 1.5f);
     [SerializeField] float maxDistanceBetweenNodes = 3f;
-    [SerializeField] float spawnRangeMagnitude = 10f;
     [SerializeField] float spawnRate = 5f;
 
 
