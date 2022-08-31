@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
-            playerRigidbody.AddRelativeForce(Vector2.up * playerFlySpeed * Time.deltaTime);
+            playerRigidbody.AddRelativeForce(playerFlySpeed * Time.deltaTime * Vector2.up);
 
             fireballs.SetActive(true);
             playerAnimator.SetBool("IsFlying", true);

@@ -20,7 +20,7 @@ public class ParallaxScroller : MonoBehaviour
         foreach(ParallaxEffect effect in Effects)
         {
             Scroll(effect);
-            if(GameManager.instance.isDead)
+            if(GameManager.instance.IsDead)
             {
                 StartDeathSequence(effect);
             }

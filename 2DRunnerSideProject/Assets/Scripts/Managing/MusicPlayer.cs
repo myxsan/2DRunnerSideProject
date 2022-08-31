@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class MusicPlayer : MonoBehaviour
 {
     public static MusicPlayer instance;
-    public static bool audioState { get; private set; } = true;
+    public static bool AudioState { get; private set; } = true;
     AudioSource audioSource;
     float musicVolume;
 
     public Button audioButton;
     [SerializeField] Sprite defaultSprite;
     public Sprite turnedOffSprite;
+
+    [SerializeField] private bool isTest;
 
     private void Awake()
     {
@@ -31,6 +33,12 @@ public class MusicPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         musicVolume = audioSource.volume;
+#if UNITY_EDITOR
+        if(isTest)
+        {
+            audioSource.volume = 0f;
+        }
+#endif
     }
 
     public void ToggleMusic()
@@ -40,14 +48,14 @@ public class MusicPlayer : MonoBehaviour
             audioSource.volume = 0;
             if (audioButton != null) audioButton.GetComponent<Image>().sprite = turnedOffSprite;
 
-            audioState = false;
+            AudioState = false;
         }
         else
         {
             audioSource.volume = musicVolume;
             if (audioButton != null) audioButton.GetComponent<Image>().sprite = defaultSprite;
 
-            audioState = true;
+            AudioState = true;
         }
     }
 }

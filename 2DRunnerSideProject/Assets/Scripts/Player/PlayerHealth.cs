@@ -75,7 +75,7 @@ public class PlayerHealth : MonoBehaviour
         DisablePlayUI();
         ThrowPlayer();
 
-        GameManager.instance.isDead = true;
+        GameManager.instance.IsDead = true;
         yield return new WaitForSeconds(1f);
 
         GameManager.instance.SetGameOverMenu(true);

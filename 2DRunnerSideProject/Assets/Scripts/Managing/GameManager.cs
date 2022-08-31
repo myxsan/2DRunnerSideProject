@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject playUI;
     public AudioClip buttonClickSFX;
     [SerializeField] Button audioButton;
-    public bool isDead { get; set; } = false;
+    public bool IsDead { get; set; } = false;
 
     private void Awake()
     {
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void SetAudioButton()
     {
-        if (MusicPlayer.audioState == false)
+        if (MusicPlayer.AudioState == false)
         {
             audioButton.GetComponent<Image>().sprite = MusicPlayer.instance.turnedOffSprite;
         }

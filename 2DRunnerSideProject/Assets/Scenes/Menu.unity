@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 1198860502}
   - component: {fileID: 1198860503}
   m_Layer: 0
-  m_Name: demo02_PixelSky_layer03
+  m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1246,7 +1246,7 @@ GameObject:
   - component: {fileID: 1771617684}
   - component: {fileID: 1771617685}
   m_Layer: 0
-  m_Name: demo02_PixelSky_layer01
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

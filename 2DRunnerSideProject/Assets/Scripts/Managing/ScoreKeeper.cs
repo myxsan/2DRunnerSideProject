@@ -18,7 +18,7 @@ public class ScoreKeeper : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.instance.isDead)
+        if (!GameManager.instance.IsDead)
         {
             IncreaseScorePerTime();
         }
