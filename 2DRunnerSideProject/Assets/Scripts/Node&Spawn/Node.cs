@@ -8,7 +8,7 @@ public class Node : MonoBehaviour
     private LineRenderer lineRenderer;
     private CapsuleCollider2D capsuleCollider;
     private Vector3 startPos;
-    private GameObject connectedNode;
+    private UnityEngine.GameObject connectedNode;
     private bool gameStarted;
 
     private void Start()
@@ -28,7 +28,6 @@ public class Node : MonoBehaviour
         {
             connectedNode.SetActive(true);
             IsSetted = true;
-            Debug.Log(GetInstanceID() + ": other node is here");
         }
         else if(gameStarted)
         {

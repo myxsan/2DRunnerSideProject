@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class ScoreKeeper : MonoBehaviour
 {
     private float score;
-    [SerializeField] float scoreMultiplier = 5;
+    public float _scoreMultiplier = 5f;
+    public float ScoreMultiplier { get; set; }
     [SerializeField] Text scoreText;
 
     public float Score { get { return score; } }
 
     void Start()
     {
+        ScoreMultiplier = _scoreMultiplier;
         score = 0;
     }
 
@@ -20,13 +22,13 @@ public class ScoreKeeper : MonoBehaviour
     {
         if (!GameManager.instance.IsDead)
         {
-            IncreaseScorePerTime();
+            IncrementScorePerTime();
         }
     }
 
-    private void IncreaseScorePerTime()
+    private void IncrementScorePerTime()
     {
-        score += Time.deltaTime * scoreMultiplier;
+        score += Time.deltaTime * ScoreMultiplier;
         scoreText.text = score.ToString("00");
     }
 }

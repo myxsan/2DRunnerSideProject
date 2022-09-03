@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerFlySpeed = 10f;
-    [SerializeField] GameObject fireballs;
+    [SerializeField] UnityEngine.GameObject fireballs;
 
     private Rigidbody2D playerRigidbody;
     private Animator playerAnimator;

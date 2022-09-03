@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27f0557f05b5754eba840fa083dad6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreMultiplier: 1
+  _scoreMultiplier: 0.3
   scoreText: {fileID: 2036091310}
 --- !u!1 &519420028
 GameObject:
@@ -1804,6 +1804,7 @@ GameObject:
   - component: {fileID: 885093732}
   - component: {fileID: 885093734}
   - component: {fileID: 885093735}
+  - component: {fileID: 885093736}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1974,6 +1975,18 @@ MonoBehaviour:
   startLives: 3
   throwPow: 10
   throwRot: 25.6
+--- !u!114 &885093736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885093728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af283866d02ce2b43a396eeec01edc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &926284229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,7 +2903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 877621804800436697, guid: 42859b81c41081d4e9896a2f08a37881, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 877621804800436697, guid: 42859b81c41081d4e9896a2f08a37881, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2966,6 +2979,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42859b81c41081d4e9896a2f08a37881, type: 3}
+--- !u!1 &1329945392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329945394}
+  - component: {fileID: 1329945393}
+  m_Layer: 0
+  m_Name: PowerUpPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1329945393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329945392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7293c4fec5c5fa241aacf5d91996abab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnIntervalRange: {x: 10, y: 25}
+  powerUpPrefabs:
+  - {fileID: 8697596599895261283, guid: d421ebb869c3d674ea70e1b20a8c9bf3, type: 3}
+--- !u!4 &1329945394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329945392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.02, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1372714954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2975,7 +3034,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4341445073645570549, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4341445073645570549, guid: 39d03b8a9e412eb44a77c1481c8fb791, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3631,7 +3690,7 @@ GameObject:
   - component: {fileID: 1830618572}
   - component: {fileID: 1830618573}
   m_Layer: 0
-  m_Name: ObstacleNodeSpawner
+  m_Name: NodePool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4241,7 +4300,7 @@ RectTransform:
   - {fileID: 1893006824}
   - {fileID: 372094971}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

@@ -8,7 +8,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        playerHealth = UnityEngine.GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

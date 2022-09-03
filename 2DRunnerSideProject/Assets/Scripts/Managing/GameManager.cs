@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameObject pauseMenu;
-    public GameObject gameOverMenu;
-    public GameObject playUI;
+    public UnityEngine.GameObject pauseMenu;
+    public UnityEngine.GameObject gameOverMenu;
+    public UnityEngine.GameObject playUI;
     public AudioClip buttonClickSFX;
     [SerializeField] Button audioButton;
     public bool IsDead { get; set; } = false;

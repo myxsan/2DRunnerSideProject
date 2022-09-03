@@ -5,8 +5,8 @@ using UnityEngine;
 public class NodePool : MonoBehaviour
 {
     [Header("Pool")]
-    public GameObject primaryNodePrefab;
-    public GameObject secondaryNodePrefab;
+    public UnityEngine.GameObject primaryNodePrefab;
+    public UnityEngine.GameObject secondaryNodePrefab;
     [Range(10, 100)] public int poolSize = 50;
 
     [Header("Borders")]
@@ -24,10 +24,10 @@ public class NodePool : MonoBehaviour
 
     private int nodeCount;
     private Node[] primaryNodes;
-    private GameObject[] secondaryNodes;
+    private UnityEngine.GameObject[] secondaryNodes;
     private int currentIndex = 0;
 
-    public static Dictionary<Node, GameObject> Nodes { get; private set; }
+    public static Dictionary<Node, UnityEngine.GameObject> Nodes { get; private set; }
     public bool IsSpawning { get; private set; }
 
     public bool hasStarted = false;
@@ -45,8 +45,8 @@ public class NodePool : MonoBehaviour
         if (!hasStarted)
         {
             primaryNodes = new Node[nodeCount];
-            secondaryNodes = new GameObject[nodeCount];
-            Nodes = new Dictionary<Node, GameObject>();
+            secondaryNodes = new UnityEngine.GameObject[nodeCount];
+            Nodes = new Dictionary<Node, UnityEngine.GameObject>();
             
             hasStarted = true;
             for(int i = 0; i < nodeCount; i++) 
@@ -70,7 +70,7 @@ public class NodePool : MonoBehaviour
         StartCoroutine(ImplementNodes(primaryNodes[currentIndex], secondaryNodes[currentIndex]));
     }
 
-    public IEnumerator ImplementNodes(Node _primaryNode, GameObject _secondaryNode)
+    public IEnumerator ImplementNodes(Node _primaryNode, UnityEngine.GameObject _secondaryNode)
     {
         if (GameManager.instance.IsDead) yield break;
         Vector3 randomPos = GetRandomPos();
