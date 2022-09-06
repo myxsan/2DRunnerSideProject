@@ -7,6 +7,7 @@ public class Node : MonoBehaviour
 
     private LineRenderer lineRenderer;
     private CapsuleCollider2D capsuleCollider;
+    NodeMover nodeMover;
     private Vector3 startPos;
     private UnityEngine.GameObject connectedNode;
     private bool gameStarted;
@@ -16,6 +17,7 @@ public class Node : MonoBehaviour
         connectedNode = NodePool.Nodes[this];
         lineRenderer = GetComponent<LineRenderer>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        nodeMover = GetComponent<NodeMover>();
 
         startPos = this.transform.position;
 
@@ -33,7 +35,6 @@ public class Node : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             connectedNode.SetActive(false);
-            //Debug.Log(GetInstanceID() + ":Where is other node");
         }
     }
     private void OnDisable()
@@ -61,6 +62,7 @@ public class Node : MonoBehaviour
         {
             lineRenderer.enabled = true;
 
+            nodeMover.MoveNode(this, connectedNode);
             lineRenderer.SetPosition(0, this.transform.position);
             lineRenderer.SetPosition(1, connectedNode.transform.position);
 

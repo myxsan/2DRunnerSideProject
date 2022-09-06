@@ -14,8 +14,7 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] Sprite defaultSprite;
     public Sprite turnedOffSprite;
 
-    [SerializeField] private bool isTest;
-
+    private Animator audioButtonAnimator;
     private void Awake()
     {
         if (MusicPlayer.instance == null)
@@ -33,12 +32,6 @@ public class MusicPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         musicVolume = audioSource.volume;
-#if UNITY_EDITOR
-        if(isTest)
-        {
-            audioSource.volume = 0f;
-        }
-#endif
     }
 
     public void ToggleMusic()
@@ -57,5 +50,12 @@ public class MusicPlayer : MonoBehaviour
 
             AudioState = true;
         }
+    }
+
+    IEnumerator ToggleAudioButtonAnimator()
+    {
+        audioButtonAnimator.enabled = true;
+        yield return new WaitForSeconds(1f);
+        audioButtonAnimator.enabled = false;
     }
 }

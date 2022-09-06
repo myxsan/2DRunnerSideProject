@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public UnityEngine.GameObject pauseMenu;
-    public UnityEngine.GameObject gameOverMenu;
-    public UnityEngine.GameObject playUI;
+    public GameObject pauseMenu;
+    public GameObject gameOverMenu;
+    public GameObject playUI;
     public AudioClip buttonClickSFX;
     [SerializeField] Button audioButton;
     public bool IsDead { get; set; } = false;

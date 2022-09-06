@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeMover : MonoBehaviour
+public class GOPusher : MonoBehaviour
 {
     [SerializeField] float pushSpeed = 10f;
 
@@ -10,7 +10,7 @@ public class NodeMover : MonoBehaviour
     {
         if (transform.position.x >= -50)
         {
-            transform.Translate(Vector2.left * pushSpeed * Time.deltaTime, Space.World);
+            transform.Translate(pushSpeed * Time.deltaTime * Vector2.left, Space.World);
         }else
         {
             this.gameObject.SetActive(false);

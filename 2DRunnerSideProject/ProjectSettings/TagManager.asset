@@ -16,7 +16,7 @@ TagManager:
   - Pusher
   - Obstacle
   - PowerUp
-  - 
+  - Ground
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PUIndicator
+    uniqueID: 2908798841
     locked: 0

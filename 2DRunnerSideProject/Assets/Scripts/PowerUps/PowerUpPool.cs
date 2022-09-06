@@ -43,14 +43,14 @@ public class PowerUpPool : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y));
-            if (GameManager.instance.IsDead) break;
      
             GameObject tempPickUp = GetRandomPickup(poolSize);
-            if(tempPickUp != null)
+            if(tempPickUp != null && !GameManager.instance.IsDead)
             {
                 tempPickUp.transform.position = transform.position;
                 tempPickUp.SetActive(true);
             }
+            else break;
         }
     }
 

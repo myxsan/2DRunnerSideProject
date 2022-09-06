@@ -15,6 +15,7 @@ public class DoubleScorePowerUp : MonoBehaviour, IPowerUp
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = true;
+        doubleScorePU.powerUpIndicator.enabled = true;
     }
 
     public void ApplyPowerUp()
@@ -25,6 +26,7 @@ public class DoubleScorePowerUp : MonoBehaviour, IPowerUp
     private IEnumerator IncrementScoreMultiplier()
     {
         spriteRenderer.enabled = false;
+        doubleScorePU.powerUpIndicator.enabled = false;
         scoreKeeper.ScoreMultiplier += doubleScorePU.effectMagnitude;
         yield return new WaitForSeconds(doubleScorePU.powerUpDuration);
         scoreKeeper.ScoreMultiplier = scoreKeeper._scoreMultiplier;
