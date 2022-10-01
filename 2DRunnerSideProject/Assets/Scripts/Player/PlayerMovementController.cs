@@ -11,7 +11,7 @@ public class PlayerMovementController : MonoBehaviour
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        playerAnimationController = GetComponent<PlayerAnimationController>();
+         playerAnimationController = GetComponent<PlayerAnimationController>();
     }
 
     void Update()
