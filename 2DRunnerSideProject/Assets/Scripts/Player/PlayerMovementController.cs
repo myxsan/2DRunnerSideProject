@@ -21,7 +21,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             {
