@@ -21,15 +21,12 @@ public class PlayerMovementController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
-            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            {
-                playerRigidbody.AddRelativeForce(playerFlySpeed * Time.deltaTime * Vector2.up);
-                playerAnimationController.IsGettingInput = true;
-            }
+            playerRigidbody.AddRelativeForce(playerFlySpeed * Time.deltaTime * Vector2.up);
+            playerAnimationController.IsGettingInput = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             playerAnimationController.IsGettingInput = false;
         }
