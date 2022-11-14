@@ -2298,6 +2298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd54dac515c50f940b1dd9546b417a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoint: 15
+  endPoint: -15
   _segments:
   - {fileID: 11400000, guid: 274ff7f1f032c22488370b3141601e39, type: 2}
   levelSpeed: 10

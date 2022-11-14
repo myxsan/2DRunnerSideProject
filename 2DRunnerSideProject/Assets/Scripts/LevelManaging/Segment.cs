@@ -17,6 +17,14 @@ public class Segment : MonoBehaviour
         transform.Translate(direction * Time.deltaTime);
     }
 
+    private void FixedUpdate() {
+        if(transform.position.x <= endPoint)
+        {
+            Destroy(gameObject, 1f);
+            SegmentApplier.Instance.enabled = true;
+        }
+    }
+
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(new Vector3(startPoint + transform.position.x, transform.position.y, 0f), 0.15f);

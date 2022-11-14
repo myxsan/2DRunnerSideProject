@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc2655c6d131fa547b2ac121c0145408, type: 3}
-  m_Name: New Level Segment
+  m_Name: Test Segment
   m_EditorClassIdentifier: 
   levelType: 5
   segmentPrefab: {fileID: 3500755079207757094, guid: 4e04f1ae7a7aa3d4cb894ed18c5b9782, type: 3}

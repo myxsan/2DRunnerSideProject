@@ -12,6 +12,4 @@ public class LevelSegmentSO : ScriptableObject
     [Space(10)]
     [Tooltip("Use only if you want to do a spesific thing after applying the segment")]
     public UnityEvent OnSegmentApply;
-    [HideInInspector]
-    public float segmentLength;
 }
